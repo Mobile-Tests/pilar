@@ -1,0 +1,13 @@
+name: pilar_mobile_test
+
+packages:
+  - app
+  - common/**
+  - features/**
+
+scripts:
+  flutter_clean:
+    exec: flutter clean
+    description: Run `flutter clean` for a specific package in this project
+    packageFilters:
+      dirExists: lib
