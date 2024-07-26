@@ -1,7 +1,11 @@
 {
   "dart.runPubGetOnPubspecChanges": "never",
   "cSpell.words": [
+    "canonicalized",
+    "datetime",
     "Intelli",
-    "interps"
+    "interps",
+    "pubspec",
+    "timeago"
   ]
 }
