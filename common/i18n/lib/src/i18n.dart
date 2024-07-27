@@ -1,10 +1,10 @@
 import 'dart:developer';
 
+import 'package:core/provider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:i18next/i18next.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'single_file_asset_bundle_data_source.dart';
