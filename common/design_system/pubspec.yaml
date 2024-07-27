@@ -1,5 +1,5 @@
-name: core
-description: A Pilar Mobile Test core package.
+name: design_system
+description: A Pilar Mobile Test design_system package.
 version: 0.0.1
 publish_to: "none"
 
@@ -8,11 +8,9 @@ environment:
   flutter: ">=3.0.0"
 
 dependencies:
-  equatable: ^2.0.5
+  core: ^0.0.1
   flutter:
     sdk: flutter
-  get_it: ^7.7.0
-  provider: ^6.1.2
 
 dev_dependencies:
   flutter_lints: ^4.0.0
