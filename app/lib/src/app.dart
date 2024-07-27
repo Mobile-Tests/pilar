@@ -1,8 +1,11 @@
+import 'dart:developer';
 import 'dart:ui' as ui;
 
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:i18n/i18n.dart';
+
+import 'splash/widgets/splash_screen.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -49,31 +52,12 @@ class _AppState extends State<App> {
       supportedLocales: i18n.supportedLocales,
       localizationsDelegates: i18n.localizationsDelegates,
       builder: (context, child) {
-        final l10n = TestL10n.of(context);
-        final appTheme = AppTheme.of(context);
-        return Material(
-          child: Padding(
-            padding: const EdgeInsets.all(x4),
-            child: Center(
-              child: Text(
-                l10n.title,
-                textAlign: TextAlign.center,
-                style: appTheme.theme.textTheme.titleMedium
-                    ?.copyWith(color: appTheme.colorScheme.tertiary),
-              ),
-            ),
-          ),
+        return SplashScreen(
+          onAnimationDone: () {
+            log('Animation done :)');
+          },
         );
       },
     );
   }
-}
-
-class TestL10n extends I18NextL10n {
-  TestL10n.of(super.context)
-      : super(
-          namespace: 'app',
-        );
-
-  String get title => localize('title');
 }
