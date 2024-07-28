@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:core/core.dart';
 import 'package:core/go_router.dart';
 
@@ -13,7 +11,7 @@ class SplashRoute extends GoRoute {
           builder: (context, state) {
             return SplashScreen(
               onAnimationDone: () {
-                log('Animation done :)');
+                context.goNamed(RouteNames.home);
               },
             );
           },
