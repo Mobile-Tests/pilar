@@ -3,4 +3,7 @@ abstract final class RouteNames {
 
   // Splash
   static const String splash = 'Splash';
+
+  // Dashboard
+  static const String home = 'Home';
 }
