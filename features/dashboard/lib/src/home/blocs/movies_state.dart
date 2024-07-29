@@ -1,4 +1,5 @@
 import 'package:core/equatable.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../data/models/movie.dart';
 
@@ -7,30 +8,21 @@ enum MoviesStatus { loading, success, error }
 class MoviesState extends Equatable {
   const MoviesState({
     required this.status,
-    this.currentPage = 0,
-    this.totalPages = 0,
-    this.movies = const [],
+    required this.pagingController,
   });
 
   final MoviesStatus status;
-  final int currentPage;
-  final int totalPages;
-  final List<Movie> movies;
+  final PagingController<int, Movie> pagingController;
 
   @override
-  List get props => [status, currentPage, totalPages, movies];
+  List get props => [status, pagingController];
 
   MoviesState copyWith({
     MoviesStatus? status,
-    int? currentPage,
-    int? totalPages,
-    List<Movie>? movies,
   }) {
     return MoviesState(
       status: status ?? this.status,
-      currentPage: currentPage ?? this.currentPage,
-      totalPages: totalPages ?? this.totalPages,
-      movies: movies ?? this.movies,
+      pagingController: pagingController,
     );
   }
 }

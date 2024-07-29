@@ -15,4 +15,7 @@ class HomeL10n extends I18NextL10n {
       arguments: {'date': date},
     );
   }
+
+  String get emptyList => localize('emptyList');
+  String get moviesFetchError => localize('moviesFetchError');
 }

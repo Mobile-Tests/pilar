@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core/flutter_bloc.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../data/repositories/movies_repository.dart';
 import 'movies_state.dart';
@@ -7,13 +8,23 @@ import 'movies_state.dart';
 abstract class MoviesCubit extends Cubit<MoviesState> {
   MoviesCubit({
     required this.repository,
-  }) : super(
-          const MoviesState(status: MoviesStatus.loading),
-        );
+  }) : super(MoviesState(
+          status: MoviesStatus.loading,
+          pagingController: PagingController(firstPageKey: 1),
+        )) {
+    state.pagingController.addPageRequestListener(_getMovies);
+    _getMovies(1);
+  }
 
   final MoviesRepository repository;
 
-  Future<void> getMovies();
+  Future<void> _getMovies(int pageKey);
+
+  @override
+  Future<void> close() {
+    state.pagingController.dispose();
+    return super.close();
+  }
 }
 
 class MoviesTrendingDayCubit extends MoviesCubit {
@@ -22,16 +33,19 @@ class MoviesTrendingDayCubit extends MoviesCubit {
   });
 
   @override
-  Future<void> getMovies() async {
+  Future<void> _getMovies(int pageKey) async {
     try {
-      final page = state.currentPage + 1;
-      final response = await repository.getTrendingDay(page: page);
-      emit(state.copyWith(
-        status: MoviesStatus.success,
-        currentPage: page,
-        totalPages: response.totalPages,
-        movies: response.results,
-      ));
+      final response = await repository.getTrendingDay(page: pageKey);
+      final isLastPage = response.page == response.totalPages;
+
+      if (isLastPage) {
+        state.pagingController.appendLastPage(response.results);
+      } else {
+        pageKey++;
+        state.pagingController.appendPage(response.results, pageKey);
+      }
+
+      emit(state.copyWith(status: MoviesStatus.success));
     } catch (_) {
       emit(state.copyWith(status: MoviesStatus.error));
     }
@@ -44,7 +58,7 @@ class MoviesTrendingDayCubitProvider
     super.key,
     super.child,
   }) : super(create: (context) {
-          return MoviesTrendingDayCubit(repository: di())..getMovies();
+          return MoviesTrendingDayCubit(repository: di());
         });
 }
 
@@ -54,16 +68,19 @@ class MoviesTrendingWeekCubit extends MoviesCubit {
   });
 
   @override
-  Future<void> getMovies() async {
+  Future<void> _getMovies(int pageKey) async {
     try {
-      final page = state.currentPage + 1;
-      final response = await repository.getTrendingWeek(page: page);
-      emit(state.copyWith(
-        status: MoviesStatus.success,
-        currentPage: page,
-        totalPages: response.totalPages,
-        movies: response.results,
-      ));
+      final response = await repository.getTrendingWeek(page: pageKey);
+      final isLastPage = response.page == response.totalPages;
+
+      if (isLastPage) {
+        state.pagingController.appendLastPage(response.results);
+      } else {
+        pageKey++;
+        state.pagingController.appendPage(response.results, pageKey);
+      }
+
+      emit(state.copyWith(status: MoviesStatus.success));
     } catch (_) {
       emit(state.copyWith(status: MoviesStatus.error));
     }
@@ -77,7 +94,7 @@ class MoviesTrendingWeekCubitProvider
     super.child,
   }) : super(
           create: (context) {
-            return MoviesTrendingWeekCubit(repository: di())..getMovies();
+            return MoviesTrendingWeekCubit(repository: di());
           },
           lazy: false,
         );
@@ -89,16 +106,19 @@ class MoviesPopularStreamingCubit extends MoviesCubit {
   });
 
   @override
-  Future<void> getMovies() async {
+  Future<void> _getMovies(int pageKey) async {
     try {
-      final page = state.currentPage + 1;
-      final response = await repository.getPopularStreaming(page: page);
-      emit(state.copyWith(
-        status: MoviesStatus.success,
-        currentPage: page,
-        totalPages: response.totalPages,
-        movies: response.results,
-      ));
+      final response = await repository.getPopularStreaming(page: pageKey);
+      final isLastPage = response.page == response.totalPages;
+
+      if (isLastPage) {
+        state.pagingController.appendLastPage(response.results);
+      } else {
+        pageKey++;
+        state.pagingController.appendPage(response.results, pageKey);
+      }
+
+      emit(state.copyWith(status: MoviesStatus.success));
     } catch (_) {
       emit(state.copyWith(status: MoviesStatus.error));
     }
@@ -111,6 +131,6 @@ class MoviesPopularStreamingCubitProvider
     super.key,
     super.child,
   }) : super(create: (context) {
-          return MoviesPopularStreamingCubit(repository: di())..getMovies();
+          return MoviesPopularStreamingCubit(repository: di());
         });
 }
