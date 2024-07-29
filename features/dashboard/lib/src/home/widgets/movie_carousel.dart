@@ -7,9 +7,11 @@ class MovieCarousel extends StatelessWidget {
   const MovieCarousel({
     super.key,
     required this.title,
+    this.labels,
   });
 
   final String title;
+  final List<String>? labels;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +29,12 @@ class MovieCarousel extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: x2),
-        const _ToggleSwitch(
-          labels: ['Hoje', 'Nesta Semana'],
-          initialLabelIndex: 0,
-        ),
+        if (labels != null && labels!.isNotEmpty) const SizedBox(height: x2),
+        if (labels != null && labels!.isNotEmpty)
+          _ToggleSwitch(
+            labels: labels!,
+            initialLabelIndex: 0,
+          ),
         const SizedBox(height: x4),
         SizedBox(
           height: 350,

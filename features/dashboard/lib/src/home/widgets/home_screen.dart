@@ -21,7 +21,10 @@ class HomeScreen extends StatelessWidget {
             child: ListView(
               padding: const EdgeInsets.symmetric(vertical: x4),
               children: const [
-                MovieCarousel(title: 'Tendências'),
+                MovieCarousel(
+                  title: 'Tendências',
+                  labels: ['Hoje', 'Nesta Semana'],
+                ),
                 MovieCarousel(title: 'Os Mais Populares'),
               ],
             ),
