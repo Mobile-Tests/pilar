@@ -5,6 +5,7 @@
     },
     "home": {
         "welcomeTitle": "Welcome.",
-        "welcomeDescription": "Millions of movies, TV shows and people to discover. Explore now."
+        "welcomeDescription": "Millions of movies, TV shows and people to discover. Explore now.",
+        "releaseDate": "{{date, MMM}} {{date, dd}}, {{date, yyyy}}"
     }
 }
