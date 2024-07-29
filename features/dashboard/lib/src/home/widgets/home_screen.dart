@@ -4,6 +4,7 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart' hide SearchBar;
 
 import '../l10n/home_l10n.dart';
+import 'movie_carousel.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -12,11 +13,19 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Material(
+    return Material(
       child: Column(
         children: [
-          _Header(),
-          Spacer(),
+          const _Header(),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(vertical: x4),
+              children: const [
+                MovieCarousel(title: 'Tendências'),
+                MovieCarousel(title: 'Os Mais Populares'),
+              ],
+            ),
+          ),
         ],
       ),
     );
