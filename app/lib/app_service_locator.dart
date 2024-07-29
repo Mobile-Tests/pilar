@@ -1,3 +1,4 @@
+import 'package:dashboard/dashboard_service_locator.dart' as dashboard;
 import 'package:network/network_service_locator.dart' as network;
 
 /// Initializes the dependencies required for the app.
@@ -16,4 +17,5 @@ import 'package:network/network_service_locator.dart' as network;
 /// This should be called at the beginning of the application startup process.
 Future<void> initAppDependencies() async {
   await network.initServiceLocator();
+  await dashboard.initServiceLocator();
 }

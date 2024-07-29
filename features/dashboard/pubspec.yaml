@@ -14,12 +14,15 @@ dependencies:
   flutter:
     sdk: flutter
   i18n: ^0.0.1
+  network: ^0.0.1
   percent_indicator: ^4.2.3
 
 dev_dependencies:
+  build_runner: ^2.4.11
   flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
+  mockito: ^5.4.4
 
 flutter:
   uses-material-design: true
