@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 
 import 'movie_card.dart';
 
-class MovieCarousel extends StatelessWidget {
-  const MovieCarousel({
+class MovieTopic extends StatelessWidget {
+  const MovieTopic({
     super.key,
     required this.title,
     this.labels,
+    this.onIndexChanged,
   });
 
   final String title;
   final List<String>? labels;
+  final ValueChanged<int>? onIndexChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class MovieCarousel extends StatelessWidget {
           _ToggleSwitch(
             labels: labels!,
             initialLabelIndex: 0,
+            onIndexChanged: onIndexChanged,
           ),
         const SizedBox(height: x4),
         SizedBox(
@@ -98,10 +101,12 @@ class _ToggleSwitch extends StatefulWidget {
   const _ToggleSwitch({
     required this.labels,
     required this.initialLabelIndex,
+    required this.onIndexChanged,
   });
 
   final List<String> labels;
   final int initialLabelIndex;
+  final ValueChanged<int>? onIndexChanged;
 
   @override
   State<_ToggleSwitch> createState() => _ToggleSwitchState();
@@ -128,6 +133,9 @@ class _ToggleSwitchState extends State<_ToggleSwitch> {
                   onTap: () {
                     setState(() {
                       _selectedIndex = index;
+                      if (widget.onIndexChanged != null) {
+                        widget.onIndexChanged!(index);
+                      }
                     });
                   },
                   child: Container(
