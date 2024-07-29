@@ -22,7 +22,7 @@ class AppTheme extends Provider<AppThemeData> {
     try {
       return Provider.of<AppThemeData>(context, listen: listen);
     } on ProviderNotFoundException {
-      return _fallback(context);
+      return _fallback();
     }
   }
 
@@ -30,8 +30,7 @@ class AppTheme extends Provider<AppThemeData> {
   /// inserted, like tests.
   ///
   /// A theme value should always have been provided in normal conditions.
-  static AppThemeData _fallback(BuildContext context) =>
-      AppThemeData.light(context);
+  static AppThemeData _fallback() => AppThemeData.light();
 }
 
 final class AppThemeData {
@@ -40,61 +39,59 @@ final class AppThemeData {
     required this.theme,
   });
 
-  factory AppThemeData.light(BuildContext context) {
+  factory AppThemeData.light() {
     final appColorScheme = AppColorScheme.light();
-    final theme = AppThemeData._getTheme(context, appColorScheme);
+    final theme = AppThemeData._getTheme(appColorScheme);
     return AppThemeData._(colorScheme: appColorScheme, theme: theme);
   }
 
-  factory AppThemeData.highContrastLight(BuildContext context) {
+  factory AppThemeData.highContrastLight() {
     // TODO: Implement high contrast light theme
     // This would typically involve adjusting colors for better contrast
     // Indicated only, not implemented in this test
-    return AppThemeData.light(context);
+    return AppThemeData.light();
   }
 
-  factory AppThemeData.dark(BuildContext context) {
+  factory AppThemeData.dark() {
     // TODO: Implement dark theme
     // This would typically involve setting darker colors for the theme
     // Indicated only, not implemented in this test
-    return AppThemeData.light(context);
+    return AppThemeData.light();
   }
 
-  factory AppThemeData.highContrastDark(BuildContext context) {
+  factory AppThemeData.highContrastDark() {
     // TODO: Implement high contrast dark theme
     // This would typically involve setting high contrast colors in dark mode
     // Indicated only, not implemented in this test
-    return AppThemeData.dark(context);
+    return AppThemeData.dark();
   }
 
   final AppColorScheme colorScheme;
   final ThemeData theme;
 
-  static ThemeData _getTheme(
-    BuildContext context,
-    AppColorScheme appColorScheme,
-  ) {
+  static ThemeData _getTheme(AppColorScheme appColorScheme) {
     final textTheme = AppTextTheme(colorScheme: appColorScheme);
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(seedColor: appColorScheme.primary),
       primarySwatch: appColorScheme.primary,
       textTheme: textTheme,
-      elevatedButtonTheme: const ElevatedButtonThemeData(
+      textButtonTheme: const TextButtonThemeData(
         style: ButtonStyle(
           elevation: WidgetStatePropertyAll(x0),
           shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(x3)),
+            borderRadius: BorderRadius.all(Radius.circular(x8)),
           )),
           minimumSize: WidgetStatePropertyAll(Size(x0, x12)),
         ),
       ),
-      outlinedButtonTheme: const OutlinedButtonThemeData(
-        style: ButtonStyle(
-          elevation: WidgetStatePropertyAll(x0),
-          shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(x3)),
-          )),
-          minimumSize: WidgetStatePropertyAll(Size(x0, x12)),
+      inputDecorationTheme: InputDecorationTheme(
+        hintStyle: TextStyle(color: appColorScheme.neutral[200]),
+        contentPadding: const EdgeInsets.all(x4),
+        filled: true,
+        fillColor: appColorScheme.backgroundContainer,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(x8),
+          borderSide: BorderSide.none,
         ),
       ),
     );

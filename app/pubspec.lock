@@ -56,6 +56,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  core_test:
+    dependency: "direct overridden"
+    description:
+      path: "../common/core_test"
+      relative: true
+    source: path
+    version: "0.0.1"
   crypto:
     dependency: transitive
     description:

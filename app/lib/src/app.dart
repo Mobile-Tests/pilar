@@ -26,13 +26,13 @@ class _AppState extends State<App> {
     final useDarkTheme = _useDarkTheme(themeMode);
     final highContrast = MediaQuery.highContrastOf(context);
     if (useDarkTheme && highContrast) {
-      return AppThemeData.highContrastDark(context);
+      return AppThemeData.highContrastDark();
     } else if (useDarkTheme) {
-      return AppThemeData.dark(context);
+      return AppThemeData.dark();
     } else if (highContrast) {
-      return AppThemeData.highContrastLight(context);
+      return AppThemeData.highContrastLight();
     } else {
-      return AppThemeData.light(context);
+      return AppThemeData.light();
     }
   }
 
