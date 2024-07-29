@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart' hide LogInterceptor;
 import 'package:flutter/foundation.dart';
 
@@ -41,36 +43,41 @@ class HttpClientImpl extends HttpClient {
     String method,
     HttpRequest request,
   ) {
-    return getOptions()
-        .then((options) {
-          return options.copyWith(method: method);
-        })
-        .then((options) => dio.request(
-              request.path,
-              queryParameters: request.queryParameters,
-              data: request.payload,
-              options: options,
-            ))
-        .then(
-          (onValue) => HttpResponse(
+    return getOptions().then((options) {
+      return options.copyWith(method: method);
+    }).then((options) {
+      final localeName = Platform.localeName.replaceAll('_', '-');
+      final queryParameters = request.queryParameters ?? {};
+      queryParameters.addAll({
+        'api_key': '97cb574a33910c97eecd96d861aafcc2',
+        'language': localeName,
+      });
+      return dio.request(
+        request.path,
+        queryParameters: queryParameters,
+        data: request.payload,
+        options: options,
+      );
+    }).then(
+      (onValue) => HttpResponse(
+        request: request,
+        headers: onValue.headers.map,
+        statusCode: onValue.statusCode,
+        data: onValue.data,
+      ),
+      onError: (error, stackTrace) {
+        if (error is DioException) {
+          throw HttpErrorResponse(
             request: request,
-            headers: onValue.headers.map,
-            statusCode: onValue.statusCode,
-            data: onValue.data,
-          ),
-          onError: (error, stackTrace) {
-            if (error is DioException) {
-              throw HttpErrorResponse(
-                request: request,
-                error: error.error,
-                message: error.message,
-                statusCode: error.response?.statusCode,
-                headers: error.response?.headers.map,
-              );
-            }
-            throw error;
-          },
-        );
+            error: error.error,
+            message: error.message,
+            statusCode: error.response?.statusCode,
+            headers: error.response?.headers.map,
+          );
+        }
+        throw error;
+      },
+    );
   }
 
   @override
