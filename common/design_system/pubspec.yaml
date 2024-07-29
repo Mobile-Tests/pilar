@@ -9,10 +9,13 @@ environment:
 
 dependencies:
   core: ^0.0.1
+  core_test: ^0.0.1
   flutter:
     sdk: flutter
+  i18n: ^0.0.1
 
 dev_dependencies:
+  coverage: ^1.8.0
   flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter

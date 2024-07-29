@@ -33,6 +33,7 @@
 build/
 **/pubspec.lock
 !app/pubspec.lock
+**/coverage
 
 # Android related
 **/android/**/gradle-wrapper.jar

@@ -50,9 +50,9 @@ class AppTextTheme extends TextTheme {
           ),
           bodyLarge: TextStyle(
             fontFamily: poppins,
-            fontSize: 20.0,
-            height: 25.0 / 20.0,
-            fontWeight: FontWeight.w400,
+            fontSize: 15.0,
+            height: 20.0 / 15.0,
+            fontWeight: FontWeight.w600,
             color: colorScheme?.neutralVariant,
           ),
           bodyMedium: TextStyle(
@@ -86,7 +86,7 @@ class AppTextTheme extends TextTheme {
           labelSmall: TextStyle(
             fontFamily: poppins,
             fontSize: 10.0,
-            height: 15.0 / 10.0,
+            height: 17.0 / 10.0,
             fontWeight: FontWeight.w500,
             color: colorScheme?.neutralVariant,
           ),

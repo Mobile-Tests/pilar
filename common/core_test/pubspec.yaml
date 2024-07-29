@@ -1,5 +1,5 @@
-name: dashboard
-description: A Pilar Mobile Test dashboard package.
+name: core_test
+description: A Pilar Mobile Test core_test package.
 version: 0.0.1
 publish_to: "none"
 
@@ -8,13 +8,10 @@ environment:
   flutter: ">=3.0.0"
 
 dependencies:
-  cached_network_image: ^3.3.1
-  core: ^0.0.1
   design_system: ^0.0.1
   flutter:
     sdk: flutter
   i18n: ^0.0.1
-  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_lints: ^4.0.0

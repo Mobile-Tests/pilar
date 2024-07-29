@@ -1,1 +1,11 @@
-{}
+{
+    "design_system": {
+        "searchBarHint": "Buscar por um Filme, Série ou Pessoa...",
+        "searchBarBt": "Buscar"
+    },
+    "home": {
+        "welcomeTitle": "Bem-Vindo(a).",
+        "welcomeDescription": "Milhões de Filmes, Séries e Pessoas para Descobrir. Explore já.",
+        "releaseDate": "{{date, dd}} de {{date, MMM}} de {{date, yyyy}}"
+    }
+}
