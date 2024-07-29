@@ -1,35 +1,74 @@
 import 'dart:developer';
 
+import 'package:core/flutter_bloc.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart' hide SearchBar;
 
+import '../blocs/movies_cubits.dart';
 import '../l10n/home_l10n.dart';
-import 'movie_carousel.dart';
+import 'movie_carousel_container.dart';
+import 'movie_topic.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,
   });
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  var _currentIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Column(
-        children: [
-          const _Header(),
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: x4),
-              children: const [
-                MovieCarousel(
-                  title: 'Tendências',
-                  labels: ['Hoje', 'Nesta Semana'],
-                ),
-                MovieCarousel(title: 'Os Mais Populares'),
-              ],
+    final appTheme = AppTheme.of(context);
+    return MultiBlocProvider(
+      providers: [
+        MoviesTrendingDayCubitProvider(),
+        MoviesTrendingWeekCubitProvider(),
+        MoviesPopularStreamingCubitProvider()
+      ],
+      child: Material(
+        color: appTheme.colorScheme.neutral,
+        child: Column(
+          children: [
+            const _Header(),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.symmetric(vertical: x4),
+                children: [
+                  MovieTopic(
+                    title: 'Tendências',
+                    labels: const ['Hoje', 'Nesta Semana'],
+                    onIndexChanged: (index) {
+                      setState(() {
+                        _currentIndex = index;
+                      });
+                    },
+                    carousel: Builder(
+                      builder: (context) {
+                        if (_currentIndex == 0) {
+                          return MovieCarouselContainer<
+                              MoviesTrendingDayCubit>();
+                        } else {
+                          return MovieCarouselContainer<
+                              MoviesTrendingWeekCubit>();
+                        }
+                      },
+                    ),
+                  ),
+                  MovieTopic(
+                    title: 'Os Mais Populares',
+                    carousel:
+                        MovieCarouselContainer<MoviesPopularStreamingCubit>(),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,19 +1,19 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
-import 'movie_card.dart';
-
 class MovieTopic extends StatelessWidget {
   const MovieTopic({
     super.key,
     required this.title,
     this.labels,
     this.onIndexChanged,
+    required this.carousel,
   });
 
   final String title;
   final List<String>? labels;
   final ValueChanged<int>? onIndexChanged;
+  final Widget carousel;
 
   @override
   Widget build(BuildContext context) {
@@ -41,56 +41,7 @@ class MovieTopic extends StatelessWidget {
         const SizedBox(height: x4),
         SizedBox(
           height: 350,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              const SizedBox(width: x4),
-              SizedBox(
-                width: 150,
-                child: MovieCard(
-                  title: 'Deadpool & Wolverine',
-                  imageUrl:
-                      'https://image.tmdb.org/t/p/w200/qkhZRqCWqJ376sBzD4MeAO2w4wv.jpg',
-                  percentage: 81,
-                  releaseDate: DateTime.parse('2024-07-24'),
-                ),
-              ),
-              const SizedBox(width: x4),
-              SizedBox(
-                width: 150,
-                child: MovieCard(
-                  title: 'Deadpool & Wolverine',
-                  imageUrl:
-                      'https://image.tmdb.org/t/p/w200/qkhZRqCWqJ376sBzD4MeAO2w4wv.jpg',
-                  percentage: 81,
-                  releaseDate: DateTime.parse('2024-07-24'),
-                ),
-              ),
-              const SizedBox(width: x4),
-              SizedBox(
-                width: 150,
-                child: MovieCard(
-                  title: 'Deadpool & Wolverine',
-                  imageUrl:
-                      'https://image.tmdb.org/t/p/w200/qkhZRqCWqJ376sBzD4MeAO2w4wv.jpg',
-                  percentage: 81,
-                  releaseDate: DateTime.parse('2024-07-24'),
-                ),
-              ),
-              const SizedBox(width: x4),
-              SizedBox(
-                width: 150,
-                child: MovieCard(
-                  title: 'Deadpool & Wolverine',
-                  imageUrl:
-                      'https://image.tmdb.org/t/p/w200/qkhZRqCWqJ376sBzD4MeAO2w4wv.jpg',
-                  percentage: 81,
-                  releaseDate: DateTime.parse('2024-07-24'),
-                ),
-              ),
-              const SizedBox(width: x4),
-            ],
-          ),
+          child: carousel,
         ),
       ],
     );

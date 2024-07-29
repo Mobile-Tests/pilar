@@ -85,11 +85,15 @@ class MovieCard extends StatelessWidget {
         ),
         Text(
           title,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
           style: appTheme.theme.textTheme.titleSmall
               ?.copyWith(color: appTheme.colorScheme.primary),
         ),
         Text(
           l10n.releaseDate(releaseDate),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: appTheme.theme.textTheme.labelMedium
               ?.copyWith(color: appTheme.colorScheme.neutral[500]),
         ),
