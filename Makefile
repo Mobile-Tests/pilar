@@ -21,3 +21,6 @@ upgrade-all:
 create-package:
 	chmod +x scripts/create-flutter-package.sh
 	@scripts/create-flutter-package.sh $(name) $(path)
+
+test-all:
+	@melos run test_flutter --no-select

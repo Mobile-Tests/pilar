@@ -1,1 +1,10 @@
-{}
+{
+    "design_system": {
+        "searchBarHint": "Search for a movie, tv show, person...",
+        "searchBarBt": "Search"
+    },
+    "home": {
+        "welcomeTitle": "Welcome.",
+        "welcomeDescription": "Millions of movies, TV shows and people to discover. Explore now."
+    }
+}

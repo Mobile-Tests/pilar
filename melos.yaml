@@ -11,3 +11,12 @@ scripts:
     description: Run `flutter clean` for a specific package in this project
     packageFilters:
       dirExists: lib
+
+  test_flutter:
+    run: flutter test --coverage --no-pub --test-randomize-ordering-seed random
+    exec:
+      failFast: true
+    description: Run Flutter tests for a specific package in this project.
+    packageFilters:
+      flutter: true
+      dirExists: test
