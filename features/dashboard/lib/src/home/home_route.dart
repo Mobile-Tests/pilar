@@ -3,6 +3,7 @@ import 'package:core/flutter_bloc.dart';
 import 'package:core/go_router.dart';
 
 import '../connectivity/blocs/connectivity_cubit.dart';
+import '../search/blocs/search_bloc.dart';
 import 'blocs/movies_cubits.dart';
 import 'widgets/home_container.dart';
 
@@ -20,6 +21,7 @@ class HomeRoute extends GoRoute {
                   MoviesTrendingDayCubitProvider(),
                   MoviesTrendingWeekCubitProvider(),
                   MoviesPopularStreamingCubitProvider(),
+                  SearchBlocProvider(),
                 ],
                 child: HomeContainer(),
               ),
