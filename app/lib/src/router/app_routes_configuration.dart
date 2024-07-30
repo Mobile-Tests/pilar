@@ -28,5 +28,6 @@ abstract class AppRoutesConfiguration {
   static List<RouteBase> getRoutes() => [
         SplashRoute(),
         HomeRoute(),
+        MovieDetailRoute(),
       ];
 }
