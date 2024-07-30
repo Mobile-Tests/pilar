@@ -1,11 +1,20 @@
 {
     "design_system": {
         "searchBarHint": "Buscar por um Filme, Série ou Pessoa...",
-        "searchBarBt": "Buscar"
+        "searchBarBt": "Buscar",
+        "tryAgainBt": "Tentar novamente"
     },
     "home": {
         "welcomeTitle": "Bem-Vindo(a).",
         "welcomeDescription": "Milhões de Filmes, Séries e Pessoas para Descobrir. Explore já.",
-        "releaseDate": "{{date, dd}} de {{date, MMM}} de {{date, yyyy}}"
+        "releaseDate": "{{date, dd}} de {{date, MMM}} de {{date, yyyy}}",
+        "trending": "Tendências",
+        "trendingDayLabel": "Hoje",
+        "trendingWeekLabel": "Nesta Semana",
+        "popular": "Os Mais Populares",
+        "emptyList": "Lista vazia :(",
+        "moviesFetchError": "Erro ao carregar :(",
+        "noInternet": "Sem conexão, tente novamente",
+        "fetchError": "Encontramos um erro. Verifique sua conexão."
     }
 }

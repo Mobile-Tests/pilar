@@ -1,7 +1,10 @@
 import 'package:core/core.dart';
+import 'package:core/flutter_bloc.dart';
 import 'package:core/go_router.dart';
 
-import 'widgets/home_screen.dart';
+import '../connectivity/blocs/connectivity_cubit.dart';
+import 'blocs/movies_cubits.dart';
+import 'widgets/home_container.dart';
 
 class HomeRoute extends GoRoute {
   HomeRoute()
@@ -9,9 +12,17 @@ class HomeRoute extends GoRoute {
           path: '/home',
           name: RouteNames.home,
           pageBuilder: (context, state) {
-            return const NoTransitionPage(
+            return NoTransitionPage(
               name: RouteNames.home,
-              child: HomeScreen(),
+              child: MultiBlocProvider(
+                providers: [
+                  ConnectivityCubitProvider(),
+                  MoviesTrendingDayCubitProvider(),
+                  MoviesTrendingWeekCubitProvider(),
+                  MoviesPopularStreamingCubitProvider(),
+                ],
+                child: HomeContainer(),
+              ),
             );
           },
         );

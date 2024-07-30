@@ -8,4 +8,5 @@ class DesignSystemL10n extends I18NextL10n {
 
   String get searchBarHint => localize('searchBarHint');
   String get searchBarBt => localize('searchBarBt');
+  String get tryAgainBt => localize('tryAgainBt');
 }

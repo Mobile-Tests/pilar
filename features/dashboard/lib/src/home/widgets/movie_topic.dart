@@ -1,15 +1,19 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
-import 'movie_card.dart';
-
-class MovieCarousel extends StatelessWidget {
-  const MovieCarousel({
+class MovieTopic extends StatelessWidget {
+  const MovieTopic({
     super.key,
     required this.title,
+    this.labels,
+    this.onIndexChanged,
+    required this.carousel,
   });
 
   final String title;
+  final List<String>? labels;
+  final ValueChanged<int>? onIndexChanged;
+  final Widget carousel;
 
   @override
   Widget build(BuildContext context) {
@@ -27,64 +31,17 @@ class MovieCarousel extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: x2),
-        const _ToggleSwitch(
-          labels: ['Hoje', 'Nesta Semana'],
-          initialLabelIndex: 0,
-        ),
+        if (labels != null && labels!.isNotEmpty) const SizedBox(height: x2),
+        if (labels != null && labels!.isNotEmpty)
+          _ToggleSwitch(
+            labels: labels!,
+            initialLabelIndex: 0,
+            onIndexChanged: onIndexChanged,
+          ),
         const SizedBox(height: x4),
         SizedBox(
           height: 350,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              const SizedBox(width: x4),
-              SizedBox(
-                width: 150,
-                child: MovieCard(
-                  title: 'Deadpool & Wolverine',
-                  imageUrl:
-                      'https://image.tmdb.org/t/p/w200/qkhZRqCWqJ376sBzD4MeAO2w4wv.jpg',
-                  percentage: 81,
-                  releaseDate: DateTime.parse('2024-07-24'),
-                ),
-              ),
-              const SizedBox(width: x4),
-              SizedBox(
-                width: 150,
-                child: MovieCard(
-                  title: 'Deadpool & Wolverine',
-                  imageUrl:
-                      'https://image.tmdb.org/t/p/w200/qkhZRqCWqJ376sBzD4MeAO2w4wv.jpg',
-                  percentage: 81,
-                  releaseDate: DateTime.parse('2024-07-24'),
-                ),
-              ),
-              const SizedBox(width: x4),
-              SizedBox(
-                width: 150,
-                child: MovieCard(
-                  title: 'Deadpool & Wolverine',
-                  imageUrl:
-                      'https://image.tmdb.org/t/p/w200/qkhZRqCWqJ376sBzD4MeAO2w4wv.jpg',
-                  percentage: 81,
-                  releaseDate: DateTime.parse('2024-07-24'),
-                ),
-              ),
-              const SizedBox(width: x4),
-              SizedBox(
-                width: 150,
-                child: MovieCard(
-                  title: 'Deadpool & Wolverine',
-                  imageUrl:
-                      'https://image.tmdb.org/t/p/w200/qkhZRqCWqJ376sBzD4MeAO2w4wv.jpg',
-                  percentage: 81,
-                  releaseDate: DateTime.parse('2024-07-24'),
-                ),
-              ),
-              const SizedBox(width: x4),
-            ],
-          ),
+          child: carousel,
         ),
       ],
     );
@@ -95,10 +52,12 @@ class _ToggleSwitch extends StatefulWidget {
   const _ToggleSwitch({
     required this.labels,
     required this.initialLabelIndex,
+    required this.onIndexChanged,
   });
 
   final List<String> labels;
   final int initialLabelIndex;
+  final ValueChanged<int>? onIndexChanged;
 
   @override
   State<_ToggleSwitch> createState() => _ToggleSwitchState();
@@ -111,20 +70,26 @@ class _ToggleSwitchState extends State<_ToggleSwitch> {
   Widget build(BuildContext context) {
     final appTheme = AppTheme.of(context);
     return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        const Spacer(),
         Flexible(
           child: SizedBox(
             height: x10,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
+              reverse: true,
               itemCount: widget.labels.length,
               separatorBuilder: (context, index) => const SizedBox(width: x2),
-              itemBuilder: (context, index) {
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, i) {
+                final index = widget.labels.length - i - 1;
                 return GestureDetector(
                   onTap: () {
                     setState(() {
                       _selectedIndex = index;
+                      if (widget.onIndexChanged != null) {
+                        widget.onIndexChanged!(index);
+                      }
                     });
                   },
                   child: Container(
@@ -141,6 +106,7 @@ class _ToggleSwitchState extends State<_ToggleSwitch> {
                     child: Center(
                       child: Text(
                         widget.labels[index],
+                        maxLines: 1,
                         style: appTheme.theme.textTheme.labelMedium?.copyWith(
                           color: index == _selectedIndex
                               ? appTheme.colorScheme.backgroundContainer

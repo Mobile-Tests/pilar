@@ -84,6 +84,16 @@ final class AppThemeData {
           minimumSize: WidgetStatePropertyAll(Size(x0, x12)),
         ),
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: WidgetStatePropertyAll(appColorScheme.primary),
+          elevation: const WidgetStatePropertyAll(x0),
+          shape: const WidgetStatePropertyAll(RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(x8)),
+          )),
+          minimumSize: const WidgetStatePropertyAll(Size(x0, x12)),
+        ),
+      ),
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: TextStyle(color: appColorScheme.neutral[200]),
         contentPadding: const EdgeInsets.all(x4),

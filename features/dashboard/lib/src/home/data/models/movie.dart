@@ -30,6 +30,10 @@ class Movie extends Equatable {
   final String releaseDate;
   final double voteAverage;
 
+  String get imageUrl => 'https://image.tmdb.org/t/p/w200/$posterPath';
+
+  int get percentage => (voteAverage * 10).toInt();
+
   @override
   List get props => [title, overview, posterPath, releaseDate, voteAverage];
 }
