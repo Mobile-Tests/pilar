@@ -21,7 +21,8 @@ abstract class MoviesCubit extends Cubit<MoviesState> {
   Future<void> onRefresh() async {
     emit(MoviesState(
       status: MoviesStatus.idle,
-      pagingController: PagingController(firstPageKey: 1),
+      pagingController: PagingController(firstPageKey: 1)
+        ..addPageRequestListener(_getMovies),
     ));
     _getMovies(1);
   }
