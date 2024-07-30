@@ -24,4 +24,5 @@ class HomeL10n extends I18NextL10n {
   String get moviesFetchError => localize('moviesFetchError');
   String get noInternet => localize('noInternet');
   String get fetchError => localize('fetchError');
+  String get detail => localize('detail');
 }

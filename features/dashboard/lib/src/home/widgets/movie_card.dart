@@ -10,18 +10,18 @@ class MovieCard extends StatelessWidget {
   const MovieCard({
     super.key,
     required this.movie,
-    required this.onMoviePressed,
+    this.onMoviePressed,
   });
 
   final Movie movie;
-  final ValueChanged<Movie> onMoviePressed;
+  final ValueChanged<Movie>? onMoviePressed;
 
   @override
   Widget build(BuildContext context) {
     final appTheme = AppTheme.of(context);
     final l10n = HomeL10n.of(context);
     return GestureDetector(
-      onTap: () => onMoviePressed(movie),
+      onTap: onMoviePressed != null ? () => onMoviePressed!(movie) : null,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,

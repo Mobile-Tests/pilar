@@ -65,7 +65,7 @@ class MovieCarouselContainer<T extends MoviesCubit>
                         child: MovieCard(
                           movie: movie,
                           onMoviePressed: (movie) {
-                            context.goNamed(
+                            context.pushNamed(
                               RouteNames.movieDetail,
                               extra: movie,
                             );

@@ -1,8 +1,8 @@
 import 'package:core/core.dart';
 import 'package:core/go_router.dart';
-import 'package:flutter/material.dart';
 
 import '../home/data/models/movie.dart';
+import 'widgets/movie_detail_screen.dart';
 
 class MovieDetailRoute extends GoRoute {
   MovieDetailRoute()
@@ -13,10 +13,9 @@ class MovieDetailRoute extends GoRoute {
             final movie = state.extra as Movie?;
             return NoTransitionPage(
               name: RouteNames.movieDetail,
-              child: Material(
-                child: Center(
-                  child: Text('MovieDetail: ${movie?.title}'),
-                ),
+              child: MovieDetailScreen(
+                movie: movie!,
+                onBackPressed: context.pop,
               ),
             );
           },

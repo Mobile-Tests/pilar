@@ -15,6 +15,7 @@
         "emptyList": "Lista vazia :(",
         "moviesFetchError": "Erro ao carregar :(",
         "noInternet": "Sem conexão, tente novamente",
-        "fetchError": "Encontramos um erro. Verifique sua conexão."
+        "fetchError": "Encontramos um erro. Verifique sua conexão.",
+        "detail": "Detalhes"
     }
 }
