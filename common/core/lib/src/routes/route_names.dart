@@ -6,4 +6,5 @@ abstract final class RouteNames {
 
   // Dashboard
   static const String home = 'Home';
+  static const String movieDetail = 'Movie Detail';
 }

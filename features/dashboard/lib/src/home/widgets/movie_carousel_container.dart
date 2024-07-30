@@ -1,4 +1,6 @@
+import 'package:core/core.dart';
 import 'package:core/flutter_bloc.dart';
+import 'package:core/go_router.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -61,10 +63,13 @@ class MovieCarouselContainer<T extends MoviesCubit>
                       child: SizedBox(
                         width: 150,
                         child: MovieCard(
-                          title: movie.title,
-                          imageUrl: movie.imageUrl,
-                          percentage: movie.percentage,
-                          releaseDate: DateTime.parse(movie.releaseDate),
+                          movie: movie,
+                          onMoviePressed: (movie) {
+                            context.pushNamed(
+                              RouteNames.movieDetail,
+                              extra: movie,
+                            );
+                          },
                         ),
                       ),
                     );
