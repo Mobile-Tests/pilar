@@ -1,13 +1,20 @@
 {
     "design_system": {
         "searchBarHint": "Search for a movie, tv show, person...",
-        "searchBarBt": "Search"
+        "searchBarBt": "Search",
+        "tryAgainBt": "Try Again"
     },
     "home": {
         "welcomeTitle": "Welcome.",
         "welcomeDescription": "Millions of movies, TV shows and people to discover. Explore now.",
         "releaseDate": "{{date, MMM}} {{date, dd}}, {{date, yyyy}}",
+        "trending": "Trending",
+        "trendingDayLabel": "Today",
+        "trendingWeekLabel": "This Week",
+        "popular": "What's Popular",
         "emptyList": "Empty list :(",
-        "moviesFetchError": "Fetch error :("
+        "moviesFetchError": "Fetch error :(",
+        "noInternet": "No connection, try again",
+        "fetchError": "We found an error. Check your connection."
     }
 }

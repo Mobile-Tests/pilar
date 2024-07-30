@@ -16,14 +16,40 @@ class MoviesRepositoryImpl extends MoviesRepository {
 
   final HttpClient httpClient;
 
+  Future<PaginatedResponse<Movie>> _handleRequest(HttpRequest request) async {
+    try {
+      final response = await httpClient.get(request);
+      if (response.statusCode != null &&
+          response.statusCode! >= 200 &&
+          response.statusCode! < 300) {
+        return PaginatedResponse<Movie>.fromJson(
+          response.dataJson,
+          Movie.fromMap,
+        );
+      } else {
+        throw HttpErrorResponse(
+          request: request,
+          message: 'HTTP error with status code ${response.statusCode}',
+          error: response.dataJson,
+          headers: response.headers,
+          statusCode: response.statusCode,
+        );
+      }
+    } catch (e) {
+      throw HttpErrorResponse(
+        request: request,
+        message: 'An error occurred: $e',
+      );
+    }
+  }
+
   @override
   Future<PaginatedResponse<Movie>> getTrendingDay({int page = 1}) async {
     final request = HttpRequest(
       path: 'https://api.themoviedb.org/3/trending/movie/day',
       queryParameters: {'page': page},
     );
-    final response = await httpClient.get(request);
-    return PaginatedResponse<Movie>.fromJson(response.dataJson, Movie.fromMap);
+    return _handleRequest(request);
   }
 
   @override
@@ -32,8 +58,7 @@ class MoviesRepositoryImpl extends MoviesRepository {
       path: 'https://api.themoviedb.org/3/trending/movie/week',
       queryParameters: {'page': page},
     );
-    final response = await httpClient.get(request);
-    return PaginatedResponse<Movie>.fromJson(response.dataJson, Movie.fromMap);
+    return _handleRequest(request);
   }
 
   @override
@@ -42,7 +67,6 @@ class MoviesRepositoryImpl extends MoviesRepository {
       path: 'https://api.themoviedb.org/3/movie/popular',
       queryParameters: {'page': page},
     );
-    final response = await httpClient.get(request);
-    return PaginatedResponse<Movie>.fromJson(response.dataJson, Movie.fromMap);
+    return _handleRequest(request);
   }
 }

@@ -70,16 +70,19 @@ class _ToggleSwitchState extends State<_ToggleSwitch> {
   Widget build(BuildContext context) {
     final appTheme = AppTheme.of(context);
     return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        const Spacer(),
         Flexible(
           child: SizedBox(
             height: x10,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
+              reverse: true,
               itemCount: widget.labels.length,
               separatorBuilder: (context, index) => const SizedBox(width: x2),
-              itemBuilder: (context, index) {
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, i) {
+                final index = widget.labels.length - i - 1;
                 return GestureDetector(
                   onTap: () {
                     setState(() {
@@ -103,6 +106,7 @@ class _ToggleSwitchState extends State<_ToggleSwitch> {
                     child: Center(
                       child: Text(
                         widget.labels[index],
+                        maxLines: 1,
                         style: appTheme.theme.textTheme.labelMedium?.copyWith(
                           color: index == _selectedIndex
                               ? appTheme.colorScheme.backgroundContainer

@@ -9,7 +9,7 @@ abstract class MoviesCubit extends Cubit<MoviesState> {
   MoviesCubit({
     required this.repository,
   }) : super(MoviesState(
-          status: MoviesStatus.loading,
+          status: MoviesStatus.idle,
           pagingController: PagingController(firstPageKey: 1),
         )) {
     state.pagingController.addPageRequestListener(_getMovies);
@@ -17,6 +17,14 @@ abstract class MoviesCubit extends Cubit<MoviesState> {
   }
 
   final MoviesRepository repository;
+
+  Future<void> onRefresh() async {
+    emit(MoviesState(
+      status: MoviesStatus.idle,
+      pagingController: PagingController(firstPageKey: 1),
+    ));
+    _getMovies(1);
+  }
 
   Future<void> _getMovies(int pageKey);
 
@@ -44,9 +52,8 @@ class MoviesTrendingDayCubit extends MoviesCubit {
         pageKey++;
         state.pagingController.appendPage(response.results, pageKey);
       }
-
-      emit(state.copyWith(status: MoviesStatus.success));
     } catch (_) {
+      if (isClosed) return;
       emit(state.copyWith(status: MoviesStatus.error));
     }
   }
@@ -79,9 +86,8 @@ class MoviesTrendingWeekCubit extends MoviesCubit {
         pageKey++;
         state.pagingController.appendPage(response.results, pageKey);
       }
-
-      emit(state.copyWith(status: MoviesStatus.success));
     } catch (_) {
+      if (isClosed) return;
       emit(state.copyWith(status: MoviesStatus.error));
     }
   }
@@ -117,9 +123,8 @@ class MoviesPopularStreamingCubit extends MoviesCubit {
         pageKey++;
         state.pagingController.appendPage(response.results, pageKey);
       }
-
-      emit(state.copyWith(status: MoviesStatus.success));
     } catch (_) {
+      if (isClosed) return;
       emit(state.copyWith(status: MoviesStatus.error));
     }
   }

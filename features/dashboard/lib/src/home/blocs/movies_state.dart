@@ -3,7 +3,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../data/models/movie.dart';
 
-enum MoviesStatus { loading, success, error }
+enum MoviesStatus { idle, error }
 
 class MoviesState extends Equatable {
   const MoviesState({

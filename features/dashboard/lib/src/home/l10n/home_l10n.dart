@@ -8,6 +8,10 @@ class HomeL10n extends I18NextL10n {
 
   String get welcomeTitle => localize('welcomeTitle');
   String get welcomeDescription => localize('welcomeDescription');
+  String get trending => localize('trending');
+  String get trendingDayLabel => localize('trendingDayLabel');
+  String get trendingWeekLabel => localize('trendingWeekLabel');
+  String get popular => localize('popular');
 
   String releaseDate(DateTime date) {
     return localize(
@@ -18,4 +22,6 @@ class HomeL10n extends I18NextL10n {
 
   String get emptyList => localize('emptyList');
   String get moviesFetchError => localize('moviesFetchError');
+  String get noInternet => localize('noInternet');
+  String get fetchError => localize('fetchError');
 }

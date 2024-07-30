@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   cached_network_image: ^3.3.1
+  connectivity_plus: ^6.0.4
   core: ^0.0.1
   design_system: ^0.0.1
   flutter:

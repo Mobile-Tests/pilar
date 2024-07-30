@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:core/flutter_bloc.dart';
 import 'package:design_system/design_system.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide SearchBar;
 
 import '../blocs/movies_cubits.dart';
@@ -12,7 +12,10 @@ import 'movie_topic.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,
+    required this.onRefresh,
   });
+
+  final AsyncCallback onRefresh;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -24,24 +27,21 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final appTheme = AppTheme.of(context);
-    return MultiBlocProvider(
-      providers: [
-        MoviesTrendingDayCubitProvider(),
-        MoviesTrendingWeekCubitProvider(),
-        MoviesPopularStreamingCubitProvider()
-      ],
-      child: Material(
-        color: appTheme.colorScheme.neutral,
-        child: Column(
-          children: [
-            const _Header(),
-            Expanded(
+    final l10n = HomeL10n.of(context);
+    return Material(
+      color: appTheme.colorScheme.neutral,
+      child: Column(
+        children: [
+          const _Header(),
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: widget.onRefresh,
               child: ListView(
                 padding: const EdgeInsets.symmetric(vertical: x4),
                 children: [
                   MovieTopic(
-                    title: 'Tendências',
-                    labels: const ['Hoje', 'Nesta Semana'],
+                    title: l10n.trending,
+                    labels: [l10n.trendingDayLabel, l10n.trendingWeekLabel],
                     onIndexChanged: (index) {
                       setState(() {
                         _currentIndex = index;
@@ -60,15 +60,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   MovieTopic(
-                    title: 'Os Mais Populares',
+                    title: l10n.popular,
                     carousel:
                         MovieCarouselContainer<MoviesPopularStreamingCubit>(),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
