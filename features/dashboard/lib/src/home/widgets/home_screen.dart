@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide SearchBar;
+import 'package:flutter/services.dart';
 
 import '../blocs/movies_cubits.dart';
 import '../l10n/home_l10n.dart';
@@ -26,6 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Set the status bar to light content
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+
     final appTheme = AppTheme.of(context);
     final l10n = HomeL10n.of(context);
     return Material(
