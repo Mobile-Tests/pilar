@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:core/go_router.dart';
 
 import '../home/data/models/movie.dart';
-import 'widgets/movie_detail_screen.dart';
+import 'widgets/movie_detail_container.dart';
 
 class MovieDetailRoute extends GoRoute {
   MovieDetailRoute()
@@ -13,7 +13,7 @@ class MovieDetailRoute extends GoRoute {
             final movie = state.extra as Movie?;
             return NoTransitionPage(
               name: RouteNames.movieDetail,
-              child: MovieDetailScreen(
+              child: MovieDetailContainer(
                 movie: movie!,
                 onBackPressed: context.pop,
               ),

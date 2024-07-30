@@ -16,6 +16,7 @@
         "moviesFetchError": "Erro ao carregar :(",
         "noInternet": "Sem conexão, tente novamente",
         "fetchError": "Encontramos um erro. Verifique sua conexão.",
+        "movieDetailRouteError": "Não foi possível carregar o filme.",
         "detail": "Detalhes"
     }
 }
